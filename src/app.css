@@ -35,3 +35,57 @@ nav a {
 .content {
   padding: 1rem;
 }
+
+.productListContainer {
+  width: 75em;
+}
+
+.productListContainer .productListItemContainer {
+  border: 1px solid silver;
+  padding: 1em;
+  margin: 1em;
+  display: inline-block;
+  height: 5em;
+  width: 20em;
+}
+
+.productListContainer .productListItemContainer .productName {
+  font-weight: bold;
+}
+
+.productListContainer .productListItemContainer .productImageContainer {
+  border: 1px solid gray;
+  height: 3em;
+  margin-top: 1em;
+  width: 18em;
+}
+
+.productListContainer .productListItemContainer .productImageContainer img.productImg {
+  display: none;
+}
+
+.productListContainer .productListItemContainer.red .productImageContainer {
+  background-color: red;
+}
+
+.productListContainer .productListItemContainer.yellow .productImageContainer {
+  background-color: yellow;
+}
+
+.productListContainer .productListItemContainer.blue .productImageContainer {
+  background-color: blue;
+}
+
+.productListContainer .productListItemContainer.black .productImageContainer {
+  background-color: black;
+}
+
+.productListContainer .productListItemContainer.pink .productImageContainer {
+  background-color: pink;
+}
+
+.productListContainer .productListItemContainer.white .productImageContainer {
+  background-color: white;
+}
+
+

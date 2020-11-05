@@ -31,6 +31,7 @@ exports.register = (app) => {
         size: s,
         color: c,
         type: "shirt",
+        line: line,
       };
     });
 

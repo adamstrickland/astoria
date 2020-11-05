@@ -33,11 +33,13 @@ export default withRouteData(({ products }) => {
     <Personalized>
       <div>
         <h2>Products</h2>
-        <div>
+        <div className="productListContainer">
           {personalizedProducts.map(p => (
-            <div>
-              <span>{p.name}</span>
-              <img src={p.imageUrl}/>
+            <div className={"productListItemContainer " + p.color}>
+              <span className="productName">{p.name}</span>
+              <div className="productImageContainer">
+                <img className="productImage" src={p.imageUrl}/>
+              </div>
             </div>
           ))}
         </div>
