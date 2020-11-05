@@ -2,15 +2,19 @@
   "name": "react-static-example-basic",
   "private": true,
   "scripts": {
-    "start": "react-static start",
-    "stage": "react-static build --staging",
-    "build": "react-static build",
     "analyze": "react-static build --analyze",
-    "serve": "serve dist -p 3000"
+    "build": "react-static build",
+    "clean": "rm -rf dist",
+    "serve": "serve dist -p 3000",
+    "stage": "react-static build --staging",
+    "start": "react-static start",
+    "test": "jest",
+    "test:watch": "yarn test --watch"
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
     "axios": "^0.19.0",
+    "qs": "^6.9.4",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-static": "^7.2.0",
@@ -28,6 +32,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^4.0.2",
+    "jest": "^26.6.3",
     "serve": "^11.1.0"
   }
 }

@@ -13,6 +13,7 @@ function App() {
   return (
     <Root>
       <nav>
+        <Link to="/shop/new-arrivals">New</Link>
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
         <Link to="/blog">Blog</Link>

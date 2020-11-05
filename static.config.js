@@ -1,11 +1,20 @@
 import path from 'path'
 import axios from 'axios'
 
+import EcommerceApi from "./src/api/EcommerceApi"
+
 export default {
   getRoutes: async () => {
     const { data: posts } = await axios.get(
       'https://jsonplaceholder.typicode.com/posts'
     )
+    const ecomm = new EcommerceApi({
+      authToken: process.env.ASTORIA_FLATIRON_API_TOKEN,
+      endpointUrl: process.env.ASTORIA_ECOMMERCE_API_ENDPOINT_URL,
+    })
+    const categories = await ecomm.categories().then((r) => r.data.categories)
+    // const data = res.data;
+    // const categories = data.categories;
 
     return [
       {
@@ -20,6 +29,12 @@ export default {
             post,
           }),
         })),
+      },
+      {
+        path: "/shop/new-arrivals",
+        getData: () => ({
+          subcategories: categories.filter(o => o.name === "New").map(o => o.sub_categories)[0],
+        }),
       },
     ]
   },
