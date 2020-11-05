@@ -10,10 +10,6 @@ import './app.css'
 addPrefetchExcludes(['dynamic'])
 
 function App() {
-  const signOut = () => {
-    localStorage.removeItem("user");
-  }
-
   return (
     <Root>
       <nav>

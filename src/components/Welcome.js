@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default () => {
-  const storedUser = localStorage.getItem("user");
-  const user = JSON.parse(storedUser);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("user")));
+  }, []);
 
   return (
     <React.Fragment>
@@ -12,4 +15,3 @@ export default () => {
     </React.Fragment>
   );
 }
-

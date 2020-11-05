@@ -5,19 +5,23 @@ import axios from "axios"
 
 export default class SignIn extends React.Component {
   signIn() {
-    axios.post("http://localhost:4000/sessions", {
-      email: "arthur.dent@hhgttg.com",
-      password: "password",
-    }).then((r) => {
-      localStorage.setItem("user", JSON.stringify(r.data));
-    }).then((_) => {
-      document.location = "/";
-    });
+    if (typeof document !== "undefined") {
+      axios.post("http://localhost:4000/sessions", {
+        email: "arthur.dent@hhgttg.com",
+        password: "password",
+      }).then((r) => {
+        localStorage.setItem("user", JSON.stringify(r.data));
+      }).then((_) => {
+        document.location = "/";
+      });
+    }
   }
 
   signOut() {
-    localStorage.removeItem("user");
-    document.location = "/";
+    if (typeof document !== "undefined") {
+      localStorage.removeItem("user");
+      document.location = "/";
+    }
   }
 
   render() {

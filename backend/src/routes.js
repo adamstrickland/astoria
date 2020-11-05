@@ -26,12 +26,12 @@ exports.register = (app) => {
     const shirts = cartesian(colors, sizes, lines).map((perm) => {
       [c, s, l] = perm;
       return {
-        name: `The ${l} Shirt in ${s} (Size ${c})`,
+        name: `The ${l} Shirt`,
         imageUrl: "/images/shirt.png",
         size: s,
         color: c,
         type: "shirt",
-        line: line,
+        line: l.toLowerCase(),
       };
     });
 
