@@ -1,4 +1,5 @@
 const express = require("express")
+const _ = require("lodash")
 
 exports.register = (app) => {
   app.get("/healthcheck", (_, r) => {
@@ -6,26 +7,46 @@ exports.register = (app) => {
     r.status(200).send();
   });
 
-  app.get("/products", (_, r) => {
+  app.get("/products", (_q, r) => {
     console.log("GET /products");
-    products = [
-      {
-        name: "A Pink Shirt",
-        imageUrl: "/images/shirt.png",
-        size: "XL",
-        color: "pink",
-      },
-      {
-        name: "A Black Shirt",
-        imageUrl: "/images/shirt.png",
-        size: "XL",
-        color: "black",
-      },
+
+    const colors = [
+      "red", "yellow", "blue", "black", "pink", "white",
     ];
+    const sizes = [
+      "S", "M", "L", "XL",
+    ];
+    const lines = [
+      "Riveria",
+      "Technical",
+      "Golf",
+      "Wacky",
+    ];
+    const cartesian = (...a) => a.reduce((a, b) => _.flatMap(a, d => b.map(e => _.flatten([d, e]))));
+    const shirts = cartesian(colors, sizes, lines).map((perm) => {
+      [c, s, l] = perm;
+      return {
+        name: `The ${l} Shirt in ${s} (Size ${c})`,
+        imageUrl: "/images/shirt.png",
+        size: s,
+        color: c,
+        type: "shirt",
+      };
+    });
+
+    const randomizer = () => {
+      const ord = Math.floor(Math.random() * Math.floor(3));
+      const offset = -1;
+      return ord - offset;
+    };
+
+    const products = [...shirts].sort(randomizer);
+
+
     r.status(200).send(products);
   });
 
-  app.post("/sessions", (_, r) => {
+  app.post("/sessions", (_q, r) => {
     console.log("POST /sessions")
     r.send({
       identifier: "12345678-90ab-cdef-1234-567890abcdef",
@@ -33,19 +54,17 @@ exports.register = (app) => {
       first_name: "Arthur",
       last_name: "Dent",
       authentication_token: "authtoken",
-      preferences :{
-        fit: {
-          shirt: {
-            sizes: {
-              accept: ["XL"],
-              deny: ["S", "M"],
-            },
-            colors: {
-              deny: [
-                "pink",
-              ],
-            },
-          },
+      fit: {
+        shirt: {
+          size: "XL",
+        },
+      },
+      preferences: {
+        like: {
+          colors: ["blue"],
+        },
+        dislike: {
+          colors: ["pink"],
         },
       },
     });

@@ -4,15 +4,20 @@ import { Link } from "@reach/router"
 import axios from "axios"
 
 export default class SignIn extends React.Component {
-  onClick() {
+  signIn() {
     axios.post("http://localhost:4000/sessions", {
-      email: "fred.flintstone@hannabarbera.com",
+      email: "arthur.dent@hhgttg.com",
       password: "password",
     }).then((r) => {
       localStorage.setItem("user", JSON.stringify(r.data));
     }).then((_) => {
       document.location = "/";
     });
+  }
+
+  signOut() {
+    localStorage.removeItem("user");
+    document.location = "/";
   }
 
   render() {
@@ -30,7 +35,8 @@ export default class SignIn extends React.Component {
           <input name="password" type="password"/>
           <br/>
           <br/>
-          <button onClick={ this.onClick }>Sign In</button>
+          <button onClick={ this.signIn }>Sign In</button>
+          <button onClick={ this.signOut }>Sign Out</button>
         </div>
       </div>
     );
