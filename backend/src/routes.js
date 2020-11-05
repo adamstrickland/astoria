@@ -1,5 +1,6 @@
 const express = require("express")
 const _ = require("lodash")
+const faker = require("faker")
 
 exports.register = (app) => {
   app.get("/healthcheck", (_, r) => {
@@ -25,13 +26,16 @@ exports.register = (app) => {
     const cartesian = (...a) => a.reduce((a, b) => _.flatMap(a, d => b.map(e => _.flatten([d, e]))));
     const shirts = cartesian(colors, sizes, lines).map((perm) => {
       [c, s, l] = perm;
+      const name = `The ${l} Shirt`;
       return {
-        name: `The ${l} Shirt`,
+        name: name,
         imageUrl: "/images/shirt.png",
         size: s,
         color: c,
         type: "shirt",
         line: l.toLowerCase(),
+        description: faker.commerce.productDescription(),
+        slug: [name, s, c].map(s => s.toLowerCase()).join("-").replace(/\s/g, '-'),
       };
     });
 

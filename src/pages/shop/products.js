@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { withRouteData } from "react-static"
 import Personalized from "../../containers/Personalized"
+import { Link } from 'components/Router'
 
 export default withRouteData(({ products }) => {
   const [productsForRender, setProductsForRender] = useState(products);
@@ -43,12 +44,14 @@ export default withRouteData(({ products }) => {
         <h2>Products</h2>
         <div className="productListContainer">
           {productsForRender && productsForRender.map(p => (
-            <div className={"productListItemContainer " + p.color}>
-              <span className="productName">{p.name} ({p.size})</span>
-              <div className="productImageContainer">
-                <img className="productImage" src={p.imageUrl}/>
+            <Link to={`/shop/products/${p.slug}`}>
+              <div className={"productListItemContainer " + p.color}>
+                <span className="productName">{p.name} ({p.size})</span>
+                <div className="productImageContainer">
+                  <img className="productImage" src={p.imageUrl}/>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

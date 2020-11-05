@@ -39,21 +39,9 @@ export default {
     });
     const categories = await ecomm.categories().then((r) => r.data.categories);
 
+    const products = await axios.get("http://localhost:4000/products").then((r) => r.data);
 
     return [
-      {
-        path: '/blog',
-        getData: () => ({
-          posts,
-        }),
-        children: posts.map(post => ({
-          path: `/post/${post.id}`,
-          template: 'src/containers/Post',
-          getData: () => ({
-            post,
-          }),
-        })),
-      },
       {
         path: "/shop/new-arrivals",
         getData: () => ({
@@ -63,8 +51,13 @@ export default {
       {
         path: "/shop/products",
         getData: async () => ({
-          products: await axios.get("http://localhost:4000/products").then((r) => r.data),
+          products: products,
         }),
+        children: products.map(product => ({
+          path: `/${product.slug}`,
+          template: "src/containers/ProductDetailPage",
+          getData: () => ({ product, }),
+        })),
       },
     ];
   },
