@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "analyze": "react-static build --analyze",
+    "backend": "node ./backend/app.js",
     "build": "react-static build",
     "clean": "rm -rf dist",
     "serve": "serve dist -p 3000",
@@ -32,6 +33,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^4.0.2",
+    "express": "^4.17.1",
     "jest": "^26.6.3",
     "serve": "^11.1.0"
   }
