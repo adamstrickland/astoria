@@ -1,9 +1,34 @@
 import path from 'path'
 import axios from 'axios'
+import React from "react"
 
 import EcommerceApi from "./src/api/EcommerceApi"
 
 export default {
+  Document: ({
+    Html,
+    Head,
+    Body,
+    children,
+    state: {
+      inlineScripts,
+      renderMeta,
+      routeInfo,
+      siteData,
+    },
+  }) => (
+    <Html lang="en-US">
+      <Head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Bonobos</title>
+      </Head>
+      <Body>
+        { children }
+      </Body>
+    </Html>
+  ),
+
   getRoutes: async () => {
     const { data: posts } = await axios.get(
       'https://jsonplaceholder.typicode.com/posts'
@@ -43,6 +68,7 @@ export default {
       },
     ];
   },
+
   plugins: [
     [
       require.resolve('react-static-plugin-source-filesystem'),
